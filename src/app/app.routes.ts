@@ -1,7 +1,6 @@
 import type { Routes } from '@angular/router';
 
 export const routes: Routes = [
-
   {
     path: '',
     redirectTo: 'inicio',
@@ -10,5 +9,9 @@ export const routes: Routes = [
   {
     path: 'inicio',
     loadComponent: () => import('./pages/inicio/inicio.page').then((m) => m.InicioPage),
+  },
+  {
+    path: 'materials',
+    loadComponent: () => import('./pages/materials/materials.page').then((m) => m.MaterialsPage),
   },
 ];
