@@ -34,6 +34,7 @@
     "@ionic/angular": "^9.0.0",
     "ionicons": "^8.1.0",
     "rxjs": "~7.8.0",
+    "swiper": "^14.4.0",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
@@ -56,5 +57,5 @@
     "vitest": "~5.0.5"
   },
   "prettier": "@ionic/prettier-config",
-  "description": "An Ionic project"
+  "description": "An Ionic project to prepared to exams 2"
 }
