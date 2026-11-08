@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonAvatar, IonButton, IonButtons, IonContent, IonHeader,
   IonIcon, IonItem, IonLabel, IonList, IonMenuToggle, IonModal, IonRouterLink, IonText, IonTitle, IonToggle, IonToolbar } from '@ionic/angular';
 import { addIcons } from 'ionicons';
-import { power } from 'ionicons/icons';
+import { power, warning } from 'ionicons/icons';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ZeldaMaterial } from '../../services/zelda-material';
 import { RouterLink } from '@angular/router';
@@ -44,7 +44,9 @@ export class MaterialsPage implements OnInit {
     initialValue: undefined,
   });
 
-  numAle = 0;
+  numAle:number | null =null
+
+
 
   constructor() {
     addIcons({ power });
@@ -61,20 +63,28 @@ export class MaterialsPage implements OnInit {
       return;
     }
 
-    const numAleatorio: number = Math.floor(Math.random() * materiales.length);
+    const numAleatorio: number = Math.floor(Math.random() * materiales.length)-1;
     console.log(materiales[numAleatorio].name);
-    this.numAle = numAleatorio;
+    this.numAle= numAleatorio;
 
     // Obtener el material seleccionado
   }
 
   aceptar(): void {
-    const materiales = this.materials()?.data[this.numAle];
+
+
+if (this.numAle === null) {
+
+  this.zeldaMaterialService.mostrarToast('Debes darle al boton random antes de aceptar',2000,'top','warning');
+  return;
+}
+    const material = this.materials()?.data[this.numAle];
     this.modal.dismiss(null, 'Aceptar');
-    if (!materiales) {
+    if (!material) {
       return;
     }
-    this.zeldaMaterialService.mostrarToast(materiales?.name, 1500, 'middle', 'success');
+
+    this.zeldaMaterialService.mostrarToast(material?.name, 1500, 'middle', 'success');
   }
 
   cancelar(): void {
