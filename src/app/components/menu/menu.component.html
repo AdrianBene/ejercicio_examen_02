@@ -1,9 +1,9 @@
 <ion-menu side="start" menuId="menu" contentId="menuPrincipal">
 
-  <ion-menu-toggle menu="menu">
-    <ion-header [translucent]="true">
+
+    <ion-header >
       <ion-toolbar class="">
-        <div class="ion-display-flex ion-justify-content-center">
+        <div class="ion-display-flex ion-justify-content-center ion-padding">
           <ion-avatar class="avatar" slot="start">
             <img src="/assets/AmongUs%20(1).jpg" alt="">
           </ion-avatar>
@@ -14,12 +14,33 @@
     </ion-header>
 
     <ion-content>
-      <ion-list class="ion-margin ion-padding">
+      <ion-list class="ion-margin">
+        <ion-item>
+          <ion-label>
+            <ion-text color="primary">Adrian Beneroso</ion-text>
+            <ion-text class="ion-display-block">1991</ion-text>
 
-  <ion-list-header>
-    <ion-label>Adrian Beneroso</ion-label>
-    <ion-label>Adrian Beneroso</ion-label>
-  </ion-list-header>
+
+
+          </ion-label>
+
+        </ion-item>
+        <ion-menu-toggle>
+          <ion-item>
+            <ion-icon color="primary" slot="start" name="cog"></ion-icon>
+            <ion-label>Ajustes</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon color="primary" slot="start" name ="settings"/>
+            <ion-label>Configuracion</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+
+
+
+
+
 
 
 
@@ -29,7 +50,7 @@
 
     </ion-content>
 
-  </ion-menu-toggle>
+
 
 
 </ion-menu>

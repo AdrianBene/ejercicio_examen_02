@@ -1,7 +1,15 @@
-import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { computed, inject, OnInit, signal, ViewChild, viewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IonAvatar, IonButton, IonButtons, IonContent, IonHeader, IonMenuToggle, IonTitle, IonToggle, IonToolbar } from '@ionic/angular';
+import { IonAvatar, IonButton, IonButtons, IonContent, IonHeader,
+  IonIcon, IonItem, IonLabel, IonList, IonMenuToggle, IonModal, IonRouterLink, IonText, IonTitle, IonToggle, IonToolbar } from '@ionic/angular';
+import { addIcons } from 'ionicons';
+import { power } from 'ionicons/icons';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { ZeldaMaterial } from '../../services/zelda-material';
+import { RouterLink } from '@angular/router';
+
 
 @Component({
   selector: 'app-materials',
@@ -15,14 +23,62 @@ import { IonAvatar, IonButton, IonButtons, IonContent, IonHeader, IonMenuToggle,
     CommonModule,
     FormsModule,
     IonAvatar,
-    IonToggle,
     IonMenuToggle,
     IonButton,
     IonButtons,
+    IonIcon,
+    IonList,
+    IonItem,
+    IonLabel,
+    IonText,
+    IonModal,
+    IonRouterLink,
+    RouterLink,
   ],
 })
 export class MaterialsPage implements OnInit {
-  constructor() {}
+  @ViewChild(IonModal) modal!: IonModal;
+  private readonly zeldaMaterialService: ZeldaMaterial = inject(ZeldaMaterial);
 
-  ngOnInit() {}
+  materials = toSignal(this.zeldaMaterialService.getZeldaMAterials(), {
+    initialValue: undefined,
+  });
+
+  numAle = 0;
+
+  constructor() {
+    addIcons({ power });
+  }
+
+  ngOnInit() {
+    console.log('hola');
+  }
+
+  generateNumRandom(): void {
+    const materiales = this.materials()?.data;
+
+    if (!materiales || materiales.length === 0) {
+      return;
+    }
+
+    const numAleatorio: number = Math.floor(Math.random() * materiales.length);
+    console.log(materiales[numAleatorio].name);
+    this.numAle = numAleatorio;
+
+    // Obtener el material seleccionado
+  }
+
+  aceptar(): void {
+    const materiales = this.materials()?.data[this.numAle];
+    this.modal.dismiss(null, 'Aceptar');
+    if (!materiales) {
+      return;
+    }
+    this.zeldaMaterialService.mostrarToast(materiales?.name, 1500, 'middle', 'success');
+  }
+
+  cancelar(): void {
+    this.modal.dismiss(null, 'close');
+    this.zeldaMaterialService.mostrarToast('Cerrar', 1500, 'middle', 'danger');
+  }
 }

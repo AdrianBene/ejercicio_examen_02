@@ -9,15 +9,74 @@
         </ion-button>
 
 
+
       </ion-menu-toggle>
+
     </ion-buttons>
 
 
 
     <ion-title class="ion-text-start ion-margin-start" color="primary">Materials</ion-title>
+    <ion-button slot="end" routerLink="/inicio">
+      Volver
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content >
+  <div class="ion-display-flex ion-justify-content-center ion-margin-top">
+    <ion-button id="open-modal" size="default" ><ion-icon name="power"></ion-icon></ion-button>
+  </div>
+
+<div class="ion-padding">
+  <ion-list>
+    @for (material of materials()?.data; track material.id) {
+      <ion-item>
+        <ion-label>
+          <h4 class="title ion-text-capitalize ">{{material.name}}</h4>
+          <ion-text  color="medium">{{material.description | slice:0:40 }}...</ion-text>
+
+        </ion-label>
+
+        <ion-avatar class="avatar-list" slot="end">
+          <img [src]="material.image" alt="">
+        </ion-avatar>
+
+      </ion-item>
+
+    }
+
+  </ion-list>
+
+</div>
+
+  <ion-modal #modal trigger="open-modal">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons class="ion-display-flex ion-justify-content-between ion-margin ion-text-uppercase">
+            <ion-button color="primary" (click)="cancelar()">Cancel</ion-button>
+            <ion-button color="primary" (click)="aceptar()">Aceptar</ion-button>
+          </ion-buttons>
+
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <div class="ion-display-flex ion-justify-content-center ion-align-items-center ion-text-uppercase ion-margin-top">
+          <ion-button (click)="generateNumRandom()" class="button-random" color="success"><ion-label color="light" class="ion-text-uppercase">random</ion-label></ion-button>
+
+
+        </div>
+        <div class ="ion-display-flex ion-justify-content-center ion-align-items-center ion-margin-top">
+          <ion-label class="ion-text-center">{{numAle}}</ion-label>
+        </div>
+
+      </ion-content>
+
+    </ng-template>
+  </ion-modal>
+
+
+
 
 </ion-content>

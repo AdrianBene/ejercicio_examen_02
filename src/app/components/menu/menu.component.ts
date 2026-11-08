@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { IonAvatar, IonContent, IonHeader, IonLabel, IonList,
+import { IonAvatar, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList,
   IonListHeader, IonMenu, IonMenuToggle, IonText, IonTitle, IonToolbar } from '@ionic/angular';
+import { addIcons } from 'ionicons';
+import { cog, settings } from 'ionicons/icons';
 
 @Component({
   selector: 'app-menu',
@@ -18,10 +20,14 @@ import { IonAvatar, IonContent, IonHeader, IonLabel, IonList,
     IonList,
     IonListHeader,
     IonText,
+    IonItem,
+    IonIcon,
   ],
 })
 export class MenuComponent implements OnInit {
-  constructor() {}
+  constructor() {
+    addIcons({cog,settings})
+  }
 
   ngOnInit() {}
 }
